@@ -8,15 +8,16 @@
         body {
             margin: 0;
             overflow: hidden;
-            background: #6e6e6e; /* darker gray */
+            background: #6e6e6e; /* dark gray */
             font-family: Arial, sans-serif;
         }
 
+        /* WHITE SNOWFLAKES */
         .flake {
             position: absolute;
-            font-size: 28px;
-            color: white;
-            opacity: 0.95;
+            font-size: 26px;
+            color: #FFFFFF; /* PURE WHITE */
+            opacity: 1;
             animation-name: fall;
             animation-timing-function: linear;
             animation-iteration-count: infinite;
@@ -88,10 +89,14 @@
             for (let i = 0; i < flakeCount; i++) {
                 let f = document.createElement("div");
                 f.className = "flake";
-                f.innerHTML = "❄️";
+
+                // custom white snowflake symbol
+                f.innerHTML = "❄"; 
+
                 f.style.left = Math.random() * window.innerWidth + "px";
                 f.style.top = Math.random() * -200 + "px";
                 f.style.animationDuration = (4 + Math.random() * 4) + "s";
+
                 container.appendChild(f);
             }
         }
@@ -137,21 +142,18 @@
                 if (snowWords.some(w => desc.includes(w))) {
                     foundSnow = true;
 
-                    // extract inches
                     let matches = desc.match(/(\d+(\.\d+)?)\s?(to|-)\s?(\d+(\.\d+)?)[ ]?inches?/);
                     if (matches) {
                         amounts.push(matches[0]);
                         continue;
                     }
 
-                    // pattern: "2 inches", "4 inch"
                     matches = desc.match(/(\d+(\.\d+)?)\s?inches?/);
                     if (matches) {
                         amounts.push(matches[0]);
                         continue;
                     }
 
-                    // "less than 1 inch"
                     matches = desc.match(/less than 1 inch/);
                     if (matches) {
                         amounts.push("less than 1 inch");
